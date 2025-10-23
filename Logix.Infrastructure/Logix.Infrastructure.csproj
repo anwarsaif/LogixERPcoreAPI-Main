@@ -1,0 +1,126 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="7.0.1" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="6.0.4" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="DinkToPdf" Version="1.0.8" />
+		<PackageReference Include="HTMLToQPDF" Version="1.1.0" />
+		<PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.3" />
+		<PackageReference Include="LibWkHtmlToX-32" Version="0.12.6.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.7" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.7" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.66.2" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.34.0" />
+		<PackageReference Include="QuestPDF" Version="2023.12.6" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="System.DirectoryServices" Version="9.0.0" />
+		<PackageReference Include="WhatsappBusiness.CloudApi" Version="1.0.20" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Logix.Application\Logix.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Resources\Core.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Core.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Hr.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Hr.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Main.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Main.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\PM.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>PM.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Resource1.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource1.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\SAL.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>SAL.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Resources\Sal.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Sal.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Core.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Core.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Hr.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Hr.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Main.en-US.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Main.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Main.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\PM.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>PM.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\Resource1.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\SAL.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>SAL.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Sal.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Sal.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="EntityConfigurations\Recruitment\" />
+		<Folder Include="Mapping\Recruitment\" />
+		<Folder Include="Repositories\Recruitment\" />
+	</ItemGroup>
+
+</Project>

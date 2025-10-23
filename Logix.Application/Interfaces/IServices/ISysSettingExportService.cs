@@ -1,0 +1,10 @@
+﻿using Logix.Application.DTOs.Main;
+using Logix.Domain.Main;
+
+namespace Logix.Application.Interfaces.IServices.Main
+{
+    public interface ISysSettingExportService : IGenericQueryService<SysSettingExportDto, SysSettingExportVw>, IGenericWriteService<SysSettingExportDto, SysSettingExportDto>
+    {
+
+    }
+}

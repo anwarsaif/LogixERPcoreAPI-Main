@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+		 xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+		 xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+		 xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2">
+	<cbc:ProfileID>reporting:1.0</cbc:ProfileID>
+	<cbc:ID>@InvoiceNumber</cbc:ID>
+	<cbc:UUID>@Id</cbc:UUID>
+	<cbc:IssueDate>@IssueDate</cbc:IssueDate>
+	<cbc:IssueTime>@IssueTime</cbc:IssueTime>
+	<cbc:InvoiceTypeCode name="@TransactionTypeCode">@InvoiceTypeCode</cbc:InvoiceTypeCode>
+	<cbc:TaxPointDate if="PaymentOrderDate">@PaymentOrderDate</cbc:TaxPointDate>
+	<cbc:DocumentCurrencyCode>@CurrencyCode</cbc:DocumentCurrencyCode>
+	<cbc:TaxCurrencyCode>SAR</cbc:TaxCurrencyCode>
+	<cbc:LineCountNumeric>@LinesCount</cbc:LineCountNumeric>
+	<cac:BillingReference if="@ReferenceId">
+		<cac:InvoiceDocumentReference>
+			<cbc:ID>@ReferenceId</cbc:ID>
+		</cac:InvoiceDocumentReference>
+	</cac:BillingReference>
+	<cac:AdditionalDocumentReference>
+		<cbc:ID>ICV</cbc:ID>
+		<cbc:UUID>@Order</cbc:UUID>
+	</cac:AdditionalDocumentReference>
+	<cac:AdditionalDocumentReference>
+		<cbc:ID>PIH</cbc:ID>
+		<cac:Attachment>
+			<cbc:EmbeddedDocumentBinaryObject mimeCode="text/plain">@PreviousInvoiceHash</cbc:EmbeddedDocumentBinaryObject>
+		</cac:Attachment>
+	</cac:AdditionalDocumentReference>
+
+	<cac:AccountingSupplierParty model="Supplier">
+		<cac:Party>
+			<cac:PartyIdentification>
+				<cbc:ID schemeID="@IdentityType">@IdentityNumber</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PostalAddress>
+				<cbc:StreetName>@StreetName</cbc:StreetName>
+				<cbc:BuildingNumber>@BuildingNumber</cbc:BuildingNumber>
+				<cbc:PlotIdentification>@AdditionalStreetAddress</cbc:PlotIdentification>
+				<cbc:CitySubdivisionName>@DistrictName</cbc:CitySubdivisionName>
+				<cbc:CityName>@CityName</cbc:CityName>
+				<cbc:PostalZone>@PostalCode</cbc:PostalZone>
+				<cac:Country>
+					<cbc:IdentificationCode>@CountryCode</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>@SellerTRN</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity>
+				<cbc:RegistrationName>@SellerName</cbc:RegistrationName>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingSupplierParty>
+	<cac:AccountingCustomerParty model="Customer">
+		<cac:Party>
+			<cac:PartyIdentification if="IdentityNumber">
+				<cbc:ID schemeID="@IdentityType">@IdentityNumber</cbc:ID>
+			</cac:PartyIdentification>
+			<cac:PostalAddress if="CustomerName">
+				<cbc:StreetName>@StreetName</cbc:StreetName>
+				<cbc:BuildingNumber>@BuildingNumber</cbc:BuildingNumber>
+				<cbc:PlotIdentification>@AdditionalStreetAddress</cbc:PlotIdentification>
+				<cbc:CitySubdivisionName>@DistrictName</cbc:CitySubdivisionName>
+				<cbc:CityName>@CityName</cbc:CityName>
+				<cbc:PostalZone>@ZipCode</cbc:PostalZone>
+				<cbc:CountrySubentity>@RegionName</cbc:CountrySubentity>
+				<cac:Country>
+					<cbc:IdentificationCode>@CountryCode</cbc:IdentificationCode>
+				</cac:Country>
+			</cac:PostalAddress>
+			<cac:PartyTaxScheme>
+				<cbc:CompanyID>@VatRegNumber</cbc:CompanyID>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:PartyTaxScheme>
+			<cac:PartyLegalEntity if="CustomerName">
+				<cbc:RegistrationName>@CustomerName</cbc:RegistrationName>
+				<cbc:CompanyLegalForm if="IsGov">GOV</cbc:CompanyLegalForm>
+			</cac:PartyLegalEntity>
+		</cac:Party>
+	</cac:AccountingCustomerParty>
+	<cac:Delivery if="DeliveryDate">
+		<cbc:ActualDeliveryDate>@DeliveryDate</cbc:ActualDeliveryDate>
+	</cac:Delivery>
+	<cac:PaymentMeans>
+		<cbc:PaymentMeansCode>@PaymentMeansCode</cbc:PaymentMeansCode>
+		<cbc:InstructionNote>@Notes</cbc:InstructionNote>
+	</cac:PaymentMeans>
+	<cac:AllowanceCharge repeat="Discounts">
+		<cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+		<cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+		<cbc:Amount currencyID="@CurrencyCode">@Amount</cbc:Amount>
+		<cac:TaxCategory>
+			<cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">@TaxCategory</cbc:ID>
+			<cbc:Percent>@Tax</cbc:Percent>
+			<cac:TaxScheme>
+				<cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
+			</cac:TaxScheme>
+		</cac:TaxCategory>
+	</cac:AllowanceCharge>
+	<cac:AllowanceCharge repeat="Charges">
+		<cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+		<cbc:AllowanceChargeReasonCode>@ChargeReasonCode</cbc:AllowanceChargeReasonCode>
+		<cbc:AllowanceChargeReason>@ChargeReason</cbc:AllowanceChargeReason>
+		<cbc:Amount currencyID="@CurrencyCode">@Amount</cbc:Amount>
+		<cac:TaxCategory>
+			<cbc:ID schemeID="UN/ECE 5305" schemeAgencyID="6">@TaxCategory</cbc:ID>
+			<cbc:Percent>@Tax</cbc:Percent>
+			<cac:TaxScheme>
+				<cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">VAT</cbc:ID>
+			</cac:TaxScheme>
+		</cac:TaxCategory>
+	</cac:AllowanceCharge>
+	<cac:TaxExchangeRate if="ExchangeRate">
+		<cbc:SourceCurrencyCode>@CurrencyCode</cbc:SourceCurrencyCode>
+		<cbc:TargetCurrencyCode>SAR</cbc:TargetCurrencyCode>
+		<cbc:CalculationRate>@ExchangeRate</cbc:CalculationRate>
+	</cac:TaxExchangeRate>
+	<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="SAR">@TaxAmountSAR</cbc:TaxAmount>
+	</cac:TaxTotal>
+	<cac:TaxTotal>
+		<cbc:TaxAmount currencyID="@CurrencyCode">@TaxAmount</cbc:TaxAmount>
+		<cac:TaxSubtotal repeat="SubTotals">
+			<cbc:TaxableAmount currencyID="@CurrencyCode">@TotalWithoutTax</cbc:TaxableAmount>
+			<cbc:TaxAmount currencyID="@CurrencyCode">@TaxAmount</cbc:TaxAmount>
+			<cac:TaxCategory>
+				<cbc:ID>@TaxCategory</cbc:ID>
+				<cbc:Percent>@Tax</cbc:Percent>
+				<cbc:TaxExemptionReasonCode if="TaxCategoryReason">@TaxCategoryReasonCode</cbc:TaxExemptionReasonCode>
+				<cbc:TaxExemptionReason if="TaxCategoryReason">@TaxCategoryReason</cbc:TaxExemptionReason>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:TaxCategory>
+		</cac:TaxSubtotal>
+	</cac:TaxTotal>
+	<cac:LegalMonetaryTotal>
+		<cbc:LineExtensionAmount currencyID="@CurrencyCode">@TotalWithoutTaxAndDiscount</cbc:LineExtensionAmount>
+		<cbc:TaxExclusiveAmount currencyID="@CurrencyCode">@TotalWithoutTax</cbc:TaxExclusiveAmount>
+		<cbc:TaxInclusiveAmount currencyID="@CurrencyCode">@TotalWithTax</cbc:TaxInclusiveAmount>
+		<cbc:AllowanceTotalAmount currencyID="@CurrencyCode">@DiscountTotalAmount</cbc:AllowanceTotalAmount>
+		<cbc:ChargeTotalAmount  currencyID="@CurrencyCode">@ChargeTotalAmount</cbc:ChargeTotalAmount>
+		<cbc:PrepaidAmount currencyID="@CurrencyCode">@PrepaidAmount</cbc:PrepaidAmount>
+		<cbc:PayableRoundingAmount currencyID="@CurrencyCode">@RoundingAmount</cbc:PayableRoundingAmount>
+		<cbc:PayableAmount currencyID="@CurrencyCode">@PaymentAmount</cbc:PayableAmount>
+	</cac:LegalMonetaryTotal>
+	<cac:InvoiceLine  repeat="Lines">
+		<cbc:ID>@Index</cbc:ID>
+		<cbc:InvoicedQuantity unitCode="@UnitCode">@Quantity</cbc:InvoicedQuantity>
+		<cbc:LineExtensionAmount currencyID="@CurrencyCode">@TotalWithoutTax</cbc:LineExtensionAmount>
+		<cac:DocumentReference if="PrepaidAmount">
+			<cbc:ID>@PrepaymentId</cbc:ID>
+			<cbc:IssueDate>@PrepaymentIssueDate</cbc:IssueDate>
+			<cbc:IssueTime>@PrepaymentIssueTime</cbc:IssueTime>
+			<cbc:DocumentTypeCode>386</cbc:DocumentTypeCode>
+		</cac:DocumentReference>
+		<cac:AllowanceCharge if="LineDiscount">
+			<cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+			<cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+			<cbc:Amount currencyID="@CurrencyCode">@LineDiscount</cbc:Amount>
+		</cac:AllowanceCharge>
+		<cac:AllowanceCharge repeat="Charges">
+			<cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+			<cbc:AllowanceChargeReasonCode>@ChargeReasonCode</cbc:AllowanceChargeReasonCode>
+			<cbc:AllowanceChargeReason>@ChargeReason</cbc:AllowanceChargeReason>
+			<cbc:Amount currencyID="@CurrencyCode">@Amount</cbc:Amount>
+		</cac:AllowanceCharge>
+		<cac:TaxTotal>
+			<cbc:TaxAmount currencyID="@CurrencyCode">@TaxAmount</cbc:TaxAmount>
+			<cbc:RoundingAmount currencyID="@CurrencyCode">@TotalWithTax</cbc:RoundingAmount>
+			<cac:TaxSubtotal if="PrepaidAmount">
+				<cbc:TaxableAmount currencyID="@CurrencyCode">@PrepaidAmount</cbc:TaxableAmount>
+				<cbc:TaxAmount currencyID="@CurrencyCode">@PrepaidTaxAmount</cbc:TaxAmount>
+				<cac:TaxCategory>
+					<cbc:ID>@TaxCategory</cbc:ID>
+					<cbc:Percent>@Tax</cbc:Percent>
+					<cac:TaxScheme>
+						<cbc:ID>VAT</cbc:ID>
+					</cac:TaxScheme>
+				</cac:TaxCategory>
+			</cac:TaxSubtotal>
+		</cac:TaxTotal>
+		<cac:Item>
+			<cbc:Name>@ProductName</cbc:Name>
+			<cac:SellersItemIdentification if="Id">
+				<cbc:ID>@Id</cbc:ID>
+			</cac:SellersItemIdentification>
+			<cac:ClassifiedTaxCategory>
+				<cbc:ID>@TaxCategory</cbc:ID>
+				<cbc:Percent>@Tax</cbc:Percent>
+				<cac:TaxScheme>
+					<cbc:ID>VAT</cbc:ID>
+				</cac:TaxScheme>
+			</cac:ClassifiedTaxCategory>
+		</cac:Item>
+		<cac:Price>
+			<cbc:PriceAmount currencyID="@CurrencyCode">@NetPrice</cbc:PriceAmount>
+			<cbc:BaseQuantity unitCode="@UnitCode">1</cbc:BaseQuantity>
+			<cac:AllowanceCharge if="PriceDiscount">
+				<cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+				<cbc:AllowanceChargeReason>discount</cbc:AllowanceChargeReason>
+				<cbc:Amount currencyID="@CurrencyCode">@PriceDiscount</cbc:Amount>
+				<cbc:BaseAmount currencyID="@CurrencyCode">@GrossPrice</cbc:BaseAmount>
+			</cac:AllowanceCharge>
+		</cac:Price>
+	</cac:InvoiceLine>
+</Invoice>

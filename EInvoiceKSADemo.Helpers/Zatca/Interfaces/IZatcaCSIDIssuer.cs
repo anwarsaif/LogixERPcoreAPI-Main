@@ -1,0 +1,22 @@
+﻿/*
+ * Author  : Ahmed Moosa
+ * Email   : ahmed_moosa83@hotmail.com
+ * LinkedIn: https://www.linkedin.com/in/ahmoosa/
+ * Date    : 26/9/2022
+ */
+using EInvoiceKSADemo.Helpers.Zatca.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EInvoiceKSADemo.Helpers.Zatca
+{
+    public interface IZatcaCSIDIssuer
+    {
+        Task<CSIDResultModel> OnboardingCSIDAsync(InputCSIDOnboardingModel model, string Facility_ID, int Environment, string Branch_ID);
+
+        Task<CSIDResultModel> RenewCSIDAsync(InputCSIDRenewingModel model, string Facility_ID, int Environment, string Branch_ID);
+    }
+}
